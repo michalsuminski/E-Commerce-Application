@@ -1,6 +1,7 @@
 package src.com.backend.services.impl;
 
 import src.com.backend.enteties.Product;
+import src.com.backend.enteties.User;
 import src.com.backend.enteties.impl.DefaultProduct;
 import src.com.backend.services.ProductManagementService;
 
@@ -47,8 +48,14 @@ public class DefaultProductManagementService implements ProductManagementService
 
 	@Override
 	public Product getProductById(int productIdToAddToCart) {
-		// <write your code here>
-		return null;
+		for(Product p: DefaultProductManagementService.products) {
+			if(p != null) {
+				if(p.getId() == productIdToAddToCart) {  // NIE MOZE BYC if(u.getEmail() == userEmail)
+					return p;
+				}
+			}
+		}
+		return null;  // in case of user with given email not found
 	}
 
 }

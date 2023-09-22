@@ -11,17 +11,34 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	private static final int DEFAULT_USERS_CAPACITY = 10;
 	
-	private static DefaultUserManagementService instance;
+	private static DefaultUserManagementService instance;  // CO TO JEST??????????
 	
-	// <write your code here>
+	private User[] listOfUsers;
+	private int indexOfLastUser = 0;
+	{
+		listOfUsers = new User[DEFAULT_USERS_CAPACITY];
+	}
 
 	private DefaultUserManagementService() {
 	}
 	
 	@Override
 	public String registerUser(User user) {
-		// <write your code here>
-		return null;
+		if(user == null) {
+			return "Provide valid user";
+		}else {
+			// we are checking if user already is in database - maybe better to do this in other way
+			for(User u : this.listOfUsers) {
+				if(u != null) {
+					if(u.equals(user)) {  
+						return "User already signed up";
+					}
+				}
+				this.listOfUsers[this.indexOfLastUser++] = user;  // sign up new user
+				return "New user is created";
+			}	
+		}
+		return null;  // it will never reach this but need to compile
 	}
 
 	public static UserManagementService getInstance() {
@@ -34,14 +51,19 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	@Override
 	public User[] getUsers() {
-		// <write your code here>
-		return null;
+		return this.listOfUsers;
 	}
 
 	@Override
 	public User getUserByEmail(String userEmail) {
-		// <write your code here>
-		return null;
+		for(User u: this.listOfUsers) {
+			if(u != null) {
+				if(u.getEmail().equals(userEmail)) {  // NIE MOZE BYC if(u.getEmail() == userEmail)
+					return u;
+				}
+			}
+		}
+		return null;  // in case of user with given email not found
 	}
 	
 	void clearServiceState() {
