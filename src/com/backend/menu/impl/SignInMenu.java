@@ -28,7 +28,12 @@ public class SignInMenu implements Menu {
 		String password = sc.nextLine();
 		User user = userManagementService.getUserByEmail(email);
 		if(user != null) {
+			if(!(user.getPassword().equals(password))){  // checking password
+				System.out.println("Unfortunately, such login and password doesn't exist");
+				return;
+			}
 			context.setLoggedInUser(user);
+			System.out.println("Glad to see you back " + user.getFirstName() + " " + user.getLastName());
 		}else {
 			System.out.println("Unfortunately, such login and password doesn't exist");
 		}		
