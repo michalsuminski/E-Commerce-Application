@@ -23,9 +23,9 @@ public class SignInMenu implements Menu {
 		this.printMenuHeader();
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please, enter your email: ");
-		String email = sc.next();
+		String email = sc.nextLine();
 		System.out.print("Please, enter your password: ");
-		String password = sc.next();
+		String password = sc.nextLine();
 		User user = userManagementService.getUserByEmail(email);
 		if(user != null) {
 			context.setLoggedInUser(user);

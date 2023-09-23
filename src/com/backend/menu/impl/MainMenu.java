@@ -17,7 +17,7 @@ public class MainMenu implements Menu {
 	private static final String MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = "Please, enter number in console to proceed."
 			+ System.lineSeparator() + "1. Sign Up" + System.lineSeparator() + "2. Sign Out" + System.lineSeparator()
 			+ "3. Product Catalog" + System.lineSeparator() + "4. My Orders" + System.lineSeparator() + "5. Settings"
-			+ System.lineSeparator() + "6. Customer List";;
+			+ System.lineSeparator() + "6. Customer List";
 
 	private ApplicationContext context;
 
@@ -32,7 +32,7 @@ public class MainMenu implements Menu {
 			this.printMenuHeader();
 			Scanner sc = new Scanner(System.in);
 			System.out.print("User input: ");
-			String option = sc.next();
+			String option = sc.nextLine();
 			Menu menuToNavigate = null;
 			switch (option) {
 			case "1":
@@ -63,7 +63,7 @@ public class MainMenu implements Menu {
 				System.exit(0);
 				break;
 			default:
-				System.out.println("default");
+				System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time.");
 			}
 			menuToNavigate.start();
 		}

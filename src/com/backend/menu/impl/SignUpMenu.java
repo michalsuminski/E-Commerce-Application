@@ -23,20 +23,32 @@ public class SignUpMenu implements Menu {
 		this.printMenuHeader();
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please, enter your first name: ");
-		String firstName = sc.next();
+		String firstName = sc.nextLine();
 		System.out.print("Please, enter your last name: ");
-		String lastName = sc.next();
+		String lastName = sc.nextLine();
 		System.out.print("Please, enter your password: ");
-		String password = sc.next();
+		String password = sc.nextLine();
 		System.out.print("Please, enter your email: ");
-		String email = sc.next();
-		DefaultUser user = new DefaultUser(firstName, lastName, password, email);
-		System.out.println(userManagementService.registerUser(user));
+		String email = sc.nextLine();
+		if(email.isBlank()) {
+			System.out.println("You have to input email to register. Please, try one more time");
+			return;
+		}
+		if(userManagementService.getUserByEmail(email) != null) {
+			System.out.println("This email is already used by another user. Please, use another email");
+			return;
+		}
+		DefaultUser user = new DefaultUser(firstName, lastName, email, password);
+		String response = userManagementService.registerUser(user);
+		System.out.println(response);
 //		System.out.println(userManagementService.getUsers()[0]);
 //		System.out.println(userManagementService.getUsers()[1]);
 //		System.out.println(userManagementService.getUsers()[2]);
 //		System.out.println(userManagementService.getUsers()[3]);
-		context.setLoggedInUser(user);
+		if(response != null) {
+			context.setLoggedInUser(user);
+		}
+		return;
 	}
 
 	@Override

@@ -4,15 +4,15 @@ import src.com.backend.enteties.User;
 import src.com.backend.services.UserManagementService;
 
 public class DefaultUserManagementService implements UserManagementService {
-	
+
 	private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
 	private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
 	private static final String NO_ERROR_MESSAGE = "";
-	
+
 	private static final int DEFAULT_USERS_CAPACITY = 10;
-	
-	private static DefaultUserManagementService instance;  // CO TO JEST??????????
-	
+
+	private static DefaultUserManagementService instance; // CO TO JEST??????????
+
 	private User[] listOfUsers;
 	private int indexOfLastUser = 0;
 	{
@@ -21,24 +21,25 @@ public class DefaultUserManagementService implements UserManagementService {
 
 	private DefaultUserManagementService() {
 	}
-	
+
 	@Override
 	public String registerUser(User user) {
-		if(user == null) {
+		if (user == null) {
 			return "Provide valid user";
-		}else {
-			// we are checking if user already is in database - maybe better to do this in other way
-			for(User u : this.listOfUsers) {
-				if(u != null) {
-					if(u.equals(user)) {  
-						return "User already signed up";
+		} else {
+			// we are checking if user already is in database - maybe better to do this in
+			// other way
+			for (User u : this.listOfUsers) {
+					if(this.indexOfLastUser > DEFAULT_USERS_CAPACITY) {
+						System.out.println("Max users capacity exceeded!!!");
+						return null;
+					}else {
+					this.listOfUsers[this.indexOfLastUser++] = user; // sign up new user
+					return "New user is created";
 					}
 				}
-				this.listOfUsers[this.indexOfLastUser++] = user;  // sign up new user
-				return "New user is created";
-			}	
-		}
-		return null;  // it will never reach this but need to compile
+			}
+		return null; // it will never reach this but need to compile
 	}
 
 	public static UserManagementService getInstance() {
@@ -48,7 +49,6 @@ public class DefaultUserManagementService implements UserManagementService {
 		return instance;
 	}
 
-	
 	@Override
 	public User[] getUsers() {
 		return this.listOfUsers;
@@ -56,16 +56,16 @@ public class DefaultUserManagementService implements UserManagementService {
 
 	@Override
 	public User getUserByEmail(String userEmail) {
-		for(User u: this.listOfUsers) {
-			if(u != null) {
-				if(u.getEmail().equals(userEmail)) {  // NIE MOZE BYC if(u.getEmail() == userEmail)
+		for (User u : this.listOfUsers) {
+			if (u != null) {
+				if (u.getEmail().equals(userEmail)) { // NIE MOZE BYC if(u.getEmail() == userEmail)
 					return u;
 				}
 			}
 		}
-		return null;  // in case of user with given email not found
+		return null; // in case of user with given email not found
 	}
-	
+
 	void clearServiceState() {
 		// <write your code here>
 	}

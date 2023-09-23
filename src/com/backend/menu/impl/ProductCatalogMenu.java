@@ -28,9 +28,16 @@ public class ProductCatalogMenu implements Menu {
 		}
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Product ID to add to cart: ");
-		String productID = sc.next();
+		String productID = sc.nextLine();
 		if(productID.equals("menu")) {
 			context.getMainMenu().start();
+		}else if(productID.equals("checkout")) {
+			if(context.getSessionCart().getProducts() != null) {
+				Menu checkoutMenu = new CheckoutMenu();
+				checkoutMenu.start();	
+			}else {
+				System.out.println("Cart is empty, please add some products.");
+			}
 		}else {
 			Product product = productManagementService.getProductById(Integer.valueOf(productID));
 			System.out.println("Product " + product.getProductName() + " has been added to your cart. If you want to add a new product - enter the product id. "
