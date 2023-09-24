@@ -57,8 +57,13 @@ public class MainMenu implements Menu {
 					break;
 				}
 			case "5":
-				System.out.println("5");
-				break;
+				if(context.getLoggedInUser() == null) {
+					System.out.println("Please, log in or create new account to change your account settings");
+					continue;
+				}else {
+					menuToNavigate = new SettingsMenu();
+					break;
+				}
 			case "6":
 				System.out.println("6");
 				System.out.println(context.getLoggedInUser());
@@ -69,6 +74,7 @@ public class MainMenu implements Menu {
 				break;
 			default:
 				System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time.");
+				continue;
 			}
 			menuToNavigate.start();
 		}

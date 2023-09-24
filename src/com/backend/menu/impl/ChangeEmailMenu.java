@@ -1,5 +1,7 @@
 package src.com.backend.menu.impl;
 
+import java.util.Scanner;
+
 import src.com.backend.configs.ApplicationContext;
 import src.com.backend.menu.Menu;
 
@@ -13,12 +15,18 @@ public class ChangeEmailMenu implements Menu {
 
 	@Override
 	public void start() {
-		// <write your code here>
+		this.printMenuHeader();
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter new password: ");
+		String newEmail = sc.nextLine();
+		context.getLoggedInUser().setEmail(newEmail);
+		System.out.println("Your email has been successfully changed");
+		context.getMainMenu().start();
 	}
 
 	@Override
 	public void printMenuHeader() {
-		// <write your code here>
+		System.out.println("***** CHANGE EMAIL *****");
 	}
 
 }
