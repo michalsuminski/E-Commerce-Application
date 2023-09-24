@@ -48,7 +48,7 @@ public class DefaultUserManagementService implements UserManagementService {
 	}
 
 	@Override
-	public User[] getUsers() {
+	public User[] getUsers() {  // To think about it: should this method return an array that contains null values???
 		return this.listOfUsers;
 	}
 

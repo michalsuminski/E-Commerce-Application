@@ -65,10 +65,8 @@ public class MainMenu implements Menu {
 					break;
 				}
 			case "6":
-				System.out.println("6");
-				System.out.println(context.getLoggedInUser());
-				continue;
-//					break;
+				menuToNavigate = new CustomerListMenu();
+				break;
 			case "exit":
 				System.exit(0);
 				break;
