@@ -1,6 +1,7 @@
 package src.com.backend.services.impl;
 
 import src.com.backend.enteties.Order;
+import src.com.backend.enteties.User;
 import src.com.backend.services.OrderManagementService;
 
 public class DefaultOrderManagementService implements OrderManagementService {
@@ -9,8 +10,12 @@ public class DefaultOrderManagementService implements OrderManagementService {
 
 	private static DefaultOrderManagementService instance;
 
-	// <write your code here>
-	
+	private Order[] listOfOrders;
+	private int indexOfLastOrder = 0;
+	{
+		listOfOrders = new Order[DEFAULT_ORDER_CAPACITY];
+	}
+
 	public static OrderManagementService getInstance() {
 		if (instance == null) {
 			instance = new DefaultOrderManagementService();
@@ -20,7 +25,15 @@ public class DefaultOrderManagementService implements OrderManagementService {
 
 	@Override
 	public void addOrder(Order order) {
-		// <write your code here>
+		if (order == null) {
+			return;
+		} else {
+			if (this.indexOfLastOrder > DEFAULT_ORDER_CAPACITY) {
+				System.out.println("Max users capacity exceeded!!!");
+			} else {
+				this.listOfOrders[this.indexOfLastOrder++] = order; // add new order
+			}
+		}
 	}
 
 	@Override
@@ -34,7 +47,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 		// <write your code here>
 		return null;
 	}
-	
+
 	void clearServiceState() {
 		// <write your code here>
 	}

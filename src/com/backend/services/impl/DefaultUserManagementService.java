@@ -27,8 +27,6 @@ public class DefaultUserManagementService implements UserManagementService {
 		if (user == null) {
 			return "Provide valid user";
 		} else {
-			// we are checking if user already is in database - maybe better to do this in
-			// other way
 			for (User u : this.listOfUsers) {
 					if(this.indexOfLastUser > DEFAULT_USERS_CAPACITY) {
 						System.out.println("Max users capacity exceeded!!!");

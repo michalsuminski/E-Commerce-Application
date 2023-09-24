@@ -50,12 +50,12 @@ public class DefaultProductManagementService implements ProductManagementService
 	public Product getProductById(int productIdToAddToCart) {
 		for(Product p: DefaultProductManagementService.products) {
 			if(p != null) {
-				if(p.getId() == productIdToAddToCart) {  // NIE MOZE BYC if(u.getEmail() == userEmail)
+				if(p.getId() == productIdToAddToCart) { 
 					return p;
 				}
 			}
 		}
-		return null;  // in case of user with given email not found
+		return null;  
 	}
 
 }

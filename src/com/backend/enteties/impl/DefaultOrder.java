@@ -1,5 +1,8 @@
 package src.com.backend.enteties.impl;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import src.com.backend.enteties.Order;
 import src.com.backend.enteties.Product;
 
@@ -10,26 +13,39 @@ public class DefaultOrder implements Order {
 	private String creditCardNumber;
 	private Product[] products;
 	private int customerId;
-
+	
 	@Override
 	public boolean isCreditCardNumberValid(String creditCardNumber) {
-		// <write your code here>
-		return false;
+		// Define the regex pattern
+        String regex = "\\d{16}";
+
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile(regex);
+
+        // Create a Matcher object
+        Matcher matcher = pattern.matcher(creditCardNumber);
+
+        // Check if the input string matches the pattern
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	@Override
 	public void setCreditCardNumber(String creditCardNumber) {
-		// <write your code here>
+		this.creditCardNumber = creditCardNumber;
 	}
 
 	@Override
 	public void setProducts(Product[] products) {
-		// <write your code here>
+		this.products = products;
 	}
 
 	@Override
 	public void setCustomerId(int customerId) {
-		// <write your code here>
+		this.customerId = customerId;
 	}
 
 

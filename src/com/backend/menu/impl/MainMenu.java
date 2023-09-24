@@ -49,8 +49,13 @@ public class MainMenu implements Menu {
 				menuToNavigate = new ProductCatalogMenu();
 				break;
 			case "4":
-				System.out.println("4");
-				break;
+				if(context.getLoggedInUser() == null) {
+					System.out.println("Please, log in or create new account to see list of your orders");
+					continue;
+				}else {
+					menuToNavigate = new MyOrdersMenu();
+					break;
+				}
 			case "5":
 				System.out.println("5");
 				break;
