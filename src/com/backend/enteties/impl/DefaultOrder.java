@@ -1,5 +1,6 @@
 package src.com.backend.enteties.impl;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,15 +54,10 @@ public class DefaultOrder implements Order {
 	public int getCustomerId() {
 		return this.customerId;
 	}
-	
+
 	@Override
 	public String toString() {
-		// <write your code here>
-		return null;
+		return "DefaultOrder [creditCardNumber=" + creditCardNumber + ", products=" + Arrays.toString(products)
+				+ ", customerId=" + customerId + "]";
 	}
-
-	
-	
-	
-
 }

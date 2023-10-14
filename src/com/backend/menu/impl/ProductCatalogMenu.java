@@ -1,5 +1,6 @@
 package src.com.backend.menu.impl;
 
+import java.util.List;
 import java.util.Scanner;
 
 import src.com.backend.configs.ApplicationContext;
@@ -23,7 +24,7 @@ public class ProductCatalogMenu implements Menu {
 	public void start() {
 		while(true) {
 			this.printMenuHeader();
-			Product[] products = productManagementService.getProducts();
+			List<Product> products = productManagementService.getProducts();
 			for(Product p : products) {
 				System.out.println(p);
 			}

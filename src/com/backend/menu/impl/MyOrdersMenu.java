@@ -1,5 +1,7 @@
 package src.com.backend.menu.impl;
 
+import java.util.List;
+
 import src.com.backend.configs.ApplicationContext;
 import src.com.backend.enteties.Order;
 import src.com.backend.enteties.Product;
@@ -20,14 +22,12 @@ public class MyOrdersMenu implements Menu {
 	@Override
 	public void start() {
 		this.printMenuHeader();
-		Order[] orders = orderManagementService.getOrders();
+		List<Order> orders = orderManagementService.getOrders();
 		if(orders == null) {
 			System.out.println("Unfortunately, you don’t have any orders yet. Navigate back to main menu to place a new order");
 			context.getMainMenu().start();
 		}else {
-			for(Order o : orders) {
-				System.out.println(o);
-			}
+			orders.stream().forEach(order -> System.out.println(order));
 			context.getMainMenu().start();
 		}
 	}

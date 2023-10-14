@@ -1,22 +1,29 @@
 package src.com.backend.services.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import src.com.backend.enteties.Product;
 import src.com.backend.enteties.User;
 import src.com.backend.enteties.impl.DefaultProduct;
 import src.com.backend.services.ProductManagementService;
+import src.com.backend.storage.ProductStoringService;
 
 public class DefaultProductManagementService implements ProductManagementService {
 	
 	private static DefaultProductManagementService instance;
 	
-	private static Product[] products;
+	private static List<Product> products;
+	
+	private static ProductStoringService productStoringService;
 	
 	static {
 		initProducts();
 	}
 
 	private static void initProducts() {
-		products = new Product[] {
+		products = new ArrayList<>(Arrays.asList(
 				new DefaultProduct(1, "Hardwood Oak Suffolk Internal Door", "Doors", 109.99),
 				new DefaultProduct(2, "Oregon Cottage Interior Oak Door", "Doors", 179.99),
 				new DefaultProduct(3, "Oregon Cottage Horizontal Interior White Oak Door", "Doors", 189.99),
@@ -27,7 +34,7 @@ public class DefaultProductManagementService implements ProductManagementService
 				new DefaultProduct(8, "Wienerberger Terca Class B Engineering Brick Red 215mm x 102.5mm x 65mm (Pack of 504)", "Bricks", 402.99),
 				new DefaultProduct(9, "Wienerberger Terca Engineering Brick Blue Perforated Class B 65mm (Pack of 400)", "Bricks", 659.99),
 				new DefaultProduct(10, "Wienerberger Engineering Brick Red Smooth Class B 73mm - Pack of 368", "Bricks", 523.99)
-		};
+		));
 	}
 	
 	private DefaultProductManagementService() {
@@ -42,13 +49,13 @@ public class DefaultProductManagementService implements ProductManagementService
 	}
 
 	@Override
-	public Product[] getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
 	@Override
 	public Product getProductById(int productIdToAddToCart) {
-		for(Product p: DefaultProductManagementService.products) {
+		for(Product p: products) {
 			if(p != null) {
 				if(p.getId() == productIdToAddToCart) { 
 					return p;
