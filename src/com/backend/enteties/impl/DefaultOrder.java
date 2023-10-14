@@ -1,6 +1,7 @@
 package src.com.backend.enteties.impl;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +13,7 @@ public class DefaultOrder implements Order {
 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 	
 	private String creditCardNumber;
-	private Product[] products;
+	private List<Product> products;
 	private int customerId;
 	
 	@Override
@@ -40,7 +41,7 @@ public class DefaultOrder implements Order {
 	}
 
 	@Override
-	public void setProducts(Product[] products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -57,7 +58,7 @@ public class DefaultOrder implements Order {
 
 	@Override
 	public String toString() {
-		return "DefaultOrder [creditCardNumber=" + creditCardNumber + ", products=" + Arrays.toString(products)
-				+ ", customerId=" + customerId + "]";
+		return "DefaultOrder [creditCardNumber=" + creditCardNumber + ", products=" + products + ", customerId="
+				+ customerId + "]";
 	}
 }
