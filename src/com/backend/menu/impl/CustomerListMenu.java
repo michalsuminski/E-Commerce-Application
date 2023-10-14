@@ -1,5 +1,7 @@
 package src.com.backend.menu.impl;
 
+import java.util.List;
+
 import src.com.backend.configs.ApplicationContext;
 import src.com.backend.enteties.User;
 import src.com.backend.menu.Menu;
@@ -19,7 +21,7 @@ public class CustomerListMenu implements Menu {
 	@Override
 	public void start() {
 		this.printMenuHeader();
-		User[] usersList = userManagementService.getUsers();
+		List<User> usersList = userManagementService.getUsers();
 		if(usersList == null) {
 			System.out.println("Customer list is empty.");
 		}else {
