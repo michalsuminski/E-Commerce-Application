@@ -41,10 +41,6 @@ public class SignUpMenu implements Menu {
 		DefaultUser user = new DefaultUser(firstName, lastName, email, password);
 		String response = userManagementService.registerUser(user);
 		System.out.println(response);
-//		System.out.println(userManagementService.getUsers()[0]);
-//		System.out.println(userManagementService.getUsers()[1]);
-//		System.out.println(userManagementService.getUsers()[2]);
-//		System.out.println(userManagementService.getUsers()[3]);
 		if(response != null) {
 			context.setLoggedInUser(user);
 		}

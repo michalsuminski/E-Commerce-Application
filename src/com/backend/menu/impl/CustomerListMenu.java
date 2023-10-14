@@ -22,7 +22,7 @@ public class CustomerListMenu implements Menu {
 	public void start() {
 		this.printMenuHeader();
 		List<User> usersList = userManagementService.getUsers();
-		if(usersList == null) {
+		if(usersList == null || usersList.isEmpty()) {
 			System.out.println("Customer list is empty.");
 		}else {
 			for(User u : usersList) {

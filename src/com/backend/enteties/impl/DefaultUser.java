@@ -19,9 +19,20 @@ public class DefaultUser implements User {
 	public DefaultUser() {
 	}
 	
-
+	// kiedy User jest tworzony z poziomu programu
 	public DefaultUser(String firstName, String lastName, String email, String password) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password; 
+	}
+
+	// kiedy User jest wczytywany z pliku
+	public DefaultUser(int id, String firstName, String lastName, String email, String password) {
+		super();
+		userCounter = id; // po to, że gdy np wczytamy 3 userów z pliku, a zrobimy nowego to żeby jego id było 4 a nie znowu 0 jak, któregoś z wczytanych (tu mniejszy problem bo nie uwzględniamy usuwania konta)
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

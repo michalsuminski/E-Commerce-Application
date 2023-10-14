@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import src.com.backend.enteties.User;
 import src.com.backend.services.UserManagementService;
+import src.com.backend.storage.impl.DefaultUserStoringService;
 
 public class DefaultUserManagementService implements UserManagementService {
 
@@ -13,14 +14,18 @@ public class DefaultUserManagementService implements UserManagementService {
 	private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
 	private static final String NO_ERROR_MESSAGE = "";
 
-	private static final int DEFAULT_USERS_CAPACITY = 10;
-
 	private static DefaultUserManagementService instance; // CO TO JEST??????????
 
-	private List<User> listOfUsers;
-	private int indexOfLastUser = 0;
-	{
-		listOfUsers = new ArrayList<User>();
+	private static List<User> listOfUsers;
+	private static DefaultUserStoringService userStoringService;
+	
+	static {
+		userStoringService = new DefaultUserStoringService();
+		loadUsers();
+	}
+	
+	private static void loadUsers() {
+		listOfUsers = userStoringService.loadUsers();
 	}
 
 	private DefaultUserManagementService() {
@@ -31,15 +36,10 @@ public class DefaultUserManagementService implements UserManagementService {
 		if (user == null) {
 			return "Provide valid user";
 		} else {
-				if(this.indexOfLastUser > DEFAULT_USERS_CAPACITY) {
-					System.out.println("Max users capacity exceeded!!!");
-					return null;
-				}else {
-				this.listOfUsers.add(user);
-				this.indexOfLastUser++;
-				return "New user is created";
-				}
-			}
+			this.userStoringService.saveUser(user);
+			this.listOfUsers.add(user);
+			return "New user is created";
+		}
 	}
 
 	public static UserManagementService getInstance() {
