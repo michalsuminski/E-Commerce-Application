@@ -38,4 +38,22 @@ public class DefaultProduct implements Product {
 		return productName;
 	}
 
+
+	@Override
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+
+	@Override
+	public double getPrice() {
+		return price;
+	}
+
+
+	@Override
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 }
